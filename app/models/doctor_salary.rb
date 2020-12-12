@@ -1,0 +1,2 @@
+class DoctorSalary < ApplicationRecord
+end

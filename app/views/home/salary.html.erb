@@ -1,0 +1,7 @@
+<%= form_tag home_calculate_salary_path, method: :post do %>
+Enter Amount here:
+<%= text_field_tag :amount %>
+<%= submit_tag  "Submit", class: "btn btn-success" %>
+<% end %>
+
+Column Value : => <%= params[:column].present? ? params[:column] : 0 %>

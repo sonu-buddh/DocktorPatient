@@ -1,0 +1,25 @@
+ <nav class="navbar navbar-expand-md ">
+     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+         <span class="navbar-toggler-icon"></span>
+     </button>
+
+     <div class="collapse navbar-collapse" id="navbarCollapse">
+         <div class="navbar-nav">
+             <div class="site-logo">
+                 <%= link_to "Hello!", root_path, class: "font-weight-bold"  %> <%= current_user.name %>
+             </div>
+         </div>
+         <div class="navbar-nav ml-auto">
+             <%= link_to "Column", home_salary_path, class: "nav-item nav-link"   %>
+             <%= link_to "Appoinments", appoinments_path, class: "nav-item nav-link "  %>
+             <% if current_user.doctor? %>
+             <%= link_to "Booked Appoinment", appoinments_booked_appointment_path, class: "nav-item nav-link "  %>
+             <% end %>
+             <% if user_signed_in? %>
+             <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: "nav-item nav-link" %>
+             <% else %>
+             <%= link_to 'Login', new_user_session_path, class: "nav-item nav-link" %>
+             <% end %>
+         </div>
+     </div>
+ </nav>

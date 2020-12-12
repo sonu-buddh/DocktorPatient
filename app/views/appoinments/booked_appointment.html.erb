@@ -1,0 +1,63 @@
+<h3>Booked Appoinments</h3>
+<div class="text-right">
+    <% if current_user.patient? %>
+    <%= link_to 'New Appoinment', new_appoinment_path , class: 'btn btn-info' %>
+    <% end %>
+</div>
+<br>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+            <th>Saturday</th>
+            <th>Sunday</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @appoinments.each do |appoinment| %>
+        <tr>
+            <td>
+                <%= appoinment.start_time&.strftime('%I:%M') %> to
+                <%= appoinment.end_time&.strftime('%I:%M') %>
+            </td>
+
+            <td>
+                <%= appoinment.start_time&.strftime('%I:%M') %> to
+                <%= appoinment.end_time&.strftime('%I:%M') %>
+            </td>
+
+            <td>
+                <%= appoinment.start_time&.strftime('%I:%M') %> to
+                <%= appoinment.end_time&.strftime('%I:%M') %>
+            </td>
+
+            <td>
+                <%= appoinment.start_time&.strftime('%I:%M') %> to
+                <%= appoinment.end_time&.strftime('%I:%M') %>
+            </td>
+
+            <td>
+                <%= appoinment.start_time&.strftime('%I:%M') %> to
+                <%= appoinment.end_time&.strftime('%I:%M') %>
+            </td>
+
+            <td>
+                <%= appoinment.start_time&.strftime('%I:%M') %> to
+                <%= appoinment.end_time&.strftime('%I:%M') %>
+            </td>
+
+            <td>
+                <%= appoinment.start_time&.strftime('%I:%M') %> to
+                <%= appoinment.end_time&.strftime('%I:%M') %>
+            </td>
+
+
+        </tr>
+        <% end %>
+    </tbody>
+</table>

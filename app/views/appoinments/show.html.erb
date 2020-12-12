@@ -1,0 +1,28 @@
+  <p id="notice"><%= notice %>
+
+
+  <div class='col-md-6'>
+      <strong>Start time:</strong>
+      <div class='form-control'>
+          <%= @appoinment.start_time.strftime('%I:%M %p') %>
+      </div>
+
+      <strong>End time:</strong>
+      <div class='form-control'>
+          <%= @appoinment.end_time.strftime('%I:%M %p') %>
+      </div>
+
+      <strong>Doctor:</strong>
+      <div class='form-control'>
+          <%= find_user( @appoinment.doctor_id ) %>
+      </div>
+
+      <strong>Status:</strong>
+      <div class='form-control'>
+          <%= @appoinment.status  %>
+      </div>
+
+      <br>
+      <%= link_to 'Edit', edit_appoinment_path(@appoinment) , class: 'btn btn-info' %> |
+      <%= link_to 'Back', appoinments_path , class: 'btn btn-primary' %>
+  </div>

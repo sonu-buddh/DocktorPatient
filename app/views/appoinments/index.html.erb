@@ -1,0 +1,43 @@
+<h3>Appoinments</h3>
+<div class="text-right">
+    <% if current_user.patient? %>
+    <%= link_to 'New Appoinment', new_appoinment_path , class: 'btn btn-info' %>
+    <% end %>
+</div>
+<br>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Start time</th>
+            <th>End time</th>
+
+            <% if current_user.doctor? %>
+            <th>User</th>
+            <% else %>
+            <th>Doctor</th>
+            <% end %>
+            <th>Status</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @appoinments.each do |appoinment| %>
+        <tr>
+            <td><%= appoinment.start_time&.strftime('%I:%M %p') %></td>
+            <td><%= appoinment.end_time&.strftime('%I:%M %p') %></td>
+
+            <% if current_user.doctor? %>
+            <td><%= find_user(appoinment.user_id) %></td>
+            <td>
+                <%= link_to 'Approve', approved_path(id: appoinment.id), class: 'btn btn-success' %>
+                <%= link_to 'Reject', rejected_path(id: appoinment.id), class: 'btn btn-danger' %>
+            </td>
+            <% else %>
+            <td><%= find_user(appoinment.doctor_id) %></td>
+            <td><%= appoinment.status %></td>
+            <% end %>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
