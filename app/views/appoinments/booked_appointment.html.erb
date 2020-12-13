@@ -20,6 +20,7 @@
 
     <tbody>
         <% @appoinments.each do |appoinment| %>
+        <% if current_user.patient? %>
         <tr>
             <td>
                 <%= appoinment.start_time&.strftime('%I:%M') %> to
@@ -58,6 +59,46 @@
 
 
         </tr>
+        <% else %>
+        <tr>
+            <td>
+                <%= appoinment.available_start&.strftime('%I:%M') %> to
+                <%= appoinment.available_end&.strftime('%I:%M') %>
+            </td>
+
+            <td>
+                <%= appoinment.available_start&.strftime('%I:%M') %> to
+                <%= appoinment.available_end&.strftime('%I:%M') %>
+            </td>
+
+            <td>
+                <%= appoinment.available_start&.strftime('%I:%M') %> to
+                <%= appoinment.available_end&.strftime('%I:%M') %>
+            </td>
+
+            <td>
+                <%= appoinment.available_start&.strftime('%I:%M') %> to
+                <%= appoinment.available_end&.strftime('%I:%M') %>
+            </td>
+
+            <td>
+                <%= appoinment.available_start&.strftime('%I:%M') %> to
+                <%= appoinment.available_end&.strftime('%I:%M') %>
+            </td>
+
+            <td>
+                <%= appoinment.available_start&.strftime('%I:%M') %> to
+                <%= appoinment.available_end&.strftime('%I:%M') %>
+            </td>
+
+            <td>
+                <%= appoinment.available_start&.strftime('%I:%M') %> to
+                <%= appoinment.available_end&.strftime('%I:%M') %>
+            </td>
+
+
+        </tr>
+        <% end %>
         <% end %>
     </tbody>
 </table>

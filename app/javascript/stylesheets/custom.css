@@ -1,0 +1,28 @@
+
+ span.glyphicon.glyphicon-arrow-left:before {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-top: 1px;
+    content: "";
+    line-height: 14px;
+    vertical-align: text-top;
+    background-image: url(https://www.malot.fr/bootstrap-datetimepicker/img/glyphicons-halflings.png);
+    background-position: 14px 14px;
+    background-repeat: no-repeat;
+    background-position: -240px -96px;
+}
+
+span.glyphicon.glyphicon-arrow-right:before {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-top: 1px;
+    content: "";
+    line-height: 14px;
+    vertical-align: text-top;
+    background-image: url(https://www.malot.fr/bootstrap-datetimepicker/img/glyphicons-halflings.png);
+    background-position: 14px 14px;
+    background-repeat: no-repeat;
+    background-position: -264px -96px;
+}

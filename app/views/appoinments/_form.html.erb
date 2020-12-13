@@ -14,12 +14,12 @@
 
     <div class="field">
         <%= form.label :start_time %>
-        <%= form.text_field :start_time , class: "form-control example" , id: "example"%>
+        <%= form.text_field :start_time , class: "form-control timepicker example" , id: "start_time"%>
     </div>
 
     <div class="field">
         <%= form.label :end_time %>
-        <%= form.text_field :end_time , class: "form-control example"%>
+        <%= form.text_field :end_time , class: "form-control timepicker example", id: 'end_time'%>
     </div>
 
     <div class="field">
@@ -37,15 +37,6 @@
 
 <script>
     $(document).ready(function() {
-        // $.datetimepicker.setDateFormatter({
-        //     parseDate: function(date, format) {
-        //         var d = moment(date, format);
-        //         return d.isValid() ? d.toDate() : false;
-        //     },
-        //     formatDate: function(date, format) {
-        //         return moment(date).format(format);
-        //     },
-        // });
 
         $(".example").datetimepicker({
             todayBtn: 1,
@@ -55,7 +46,13 @@
             minView: 0,
             maxView: 1,
             forceParse: 0
-            // ignoreReadonly: true
         });
+
+        // $('#start_time').change(function() {
+        //     var start_time = $('#start_time').val();
+        //     console.log(start_time);
+        //     $('#end_time').val(start_time + 1);
+        // });
+
     })
 </script>

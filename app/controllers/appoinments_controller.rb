@@ -16,7 +16,8 @@ class AppoinmentsController < ApplicationController
     today = Date.today
     start_date = today.beginning_of_week(start_day = :monday)
     end_date = today.end_of_week(start_day = :monday)
-    @appoinments = Appoinment.where(:start_time => start_date..end_date).where(doctor_id: current_user.id, status: 'approved')
+
+    @appoinments = Appoinment.where("start_time >= :start_date OR end_time <= :end_date", {start_date: start_date, end_date: end_date})
   end
   
 

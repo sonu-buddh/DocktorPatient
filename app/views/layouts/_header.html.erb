@@ -12,9 +12,7 @@
          <div class="navbar-nav ml-auto">
              <%= link_to "Column", home_salary_path, class: "nav-item nav-link"   %>
              <%= link_to "Appoinments", appoinments_path, class: "nav-item nav-link "  %>
-             <% if current_user.doctor? %>
              <%= link_to "Booked Appoinment", appoinments_booked_appointment_path, class: "nav-item nav-link "  %>
-             <% end %>
              <% if user_signed_in? %>
              <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: "nav-item nav-link" %>
              <% else %>
