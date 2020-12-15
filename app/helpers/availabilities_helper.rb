@@ -4,6 +4,7 @@ module AvailabilitiesHelper
         today = Date.today
         start_date = today.beginning_of_week(bigining_day = :monday)
         end_date = today.end_of_week(end_day = :monday)
+        
         Availability.joins(:user).where("available_date >= :start_date AND available_date <= :end_date", {start_date: date, end_date: date}).pluck("users.name, users.id").uniq
     end
 

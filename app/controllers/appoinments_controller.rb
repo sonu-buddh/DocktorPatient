@@ -24,7 +24,7 @@ class AppoinmentsController < ApplicationController
     @appoinment = Appoinment.new(appoinment_params)
     @appoinment.user_id = current_user.id
     @appoinment.status = 'pending'
-
+    
     respond_to do |format|
       if @appoinment.save
         format.html { redirect_to @appoinment, notice: 'Appoinment was successfully created.' }

@@ -1,35 +1,28 @@
     <%= form_with(model: appoinment, local: true) do |form| %>
-    <%= form.label :booked_date %>
-    <%= form.text_field :booked_date ,class: "ajaxcall", id: "datepicker"%>
+        <%= form.label :booked_date %>
+        <%= form.text_field :booked_date, id: "datepicker", placeholder: "Select date"%>
 
-    <%= form.label :start_time %>
-    <%= form.text_field :start_time , class: "timepicker ajaxcall" , id: "start_time" %>
+        <%= form.label :start_time %>
+        <%= form.text_field :start_time , class: "timepicker" , id: "start_time" %>
 
-    <%= form.label :end_time %>
-    <%= form.text_field :end_time , class: "timepicker ajaxcall", id: 'end_time' %>
+        <%= form.label :end_time %>
+        <%= form.text_field :end_time , class: "timepicker", id: 'end_time' %>
 
-    <%= form.select :doctor_id, options_for_select(get_doctor, "Select Doctor"), {:prompt => '-- Select Doctor --'} %>
+        <%= form.select :doctor_id, options_for_select(get_available_doctor(Date.today), "Select Doctor"), {:prompt => '-- Select Doctor --'}, id: 'select_doctor' %>
 
     <%= form.submit "Save", class: 'btn btn-success' %>
     <% end %>
 
     <script>
         $(function() {
-            // $("#datepicker").datepicker();
-
             var dateToday = new Date();
             var dates = $("#datepicker").datepicker({
                 dateFormat: "dd-mm-yy",
                 defaultDate: "+1w",
-                // changeMonth: true,
-                // numberOfMonths: 3,
                 minDate: dateToday,
-                // onSelect: function(selectedDate) {
-                //     var option = this.id == "from" ? "minDate" : "maxDate",
-                //         instance = $(this).data("datepicker"),
-                //         date = $.datepicker.parseDate(instance.settings.dateFormat || $.datepicker._defaults.dateFormat, selectedDate, instance.settings);
-                //     dates.not(this).datepicker("option", option, date);
-                // }
+                onSelect: function(selectedDate) {
+                    event();
+                }
             });
 
             $('.timepicker').timepicker({
@@ -37,31 +30,38 @@
                 interval: 60,
                 minTime: '10',
                 maxTime: '6:00pm',
-                defaultTime: '11',
+                defaultTime: '10',
                 startTime: '10:00',
                 dynamic: false,
                 dropdown: true,
-                scrollbar: true
-                // change: event
+                scrollbar: true,
+                change: event
             });
 
         });
 
-        $(document).ready(function() {
-            console.log("ready!");
+        function event() {
+            var date = $('#datepicker').val();
+            var start_time = $('#start_time').val();
+            var end_time = $('#end_time').val();
+            console.log("called.....");
 
-            $('.timepicker').change(function() {
-
-                // var start_time = $('#start_time').val();
-                // $('#end_time').val(start_time);
-                console.log('start_time');
+            $.ajax({
+                url: "/availabilities/available_doctors",
+                method: "GET",
+                data: {date: date, start_time: start_time, end_time: end_time},
+                success: function(result) {
+                    if (result.length === 0) {
+                        $('#select_doctor').html(new Option("-- Select Doctor --", ""))
+                    } else {
+                        $.each(result, function(key, value) {
+                            $('#select_doctor').append(new Option(value[0], value[1]))
+                        });
+                    }
+                },
+                error: function() {
+                    console.log("Ajax request error");
+                },
             });
-
-            $('.ajaxcall').change(function() {
-                var start_time = $('#datepicker').val();
-
-                console.log(start_time);
-            });
-
-        });
+        }
     </script>

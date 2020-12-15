@@ -4,12 +4,19 @@ class AvailabilitiesController < ApplicationController
   include AvailabilitiesHelper
 
   def index
-    # @availabilities = Availability.all
     today = Date.today
     start_date = today.beginning_of_week(start_day = :monday)
     end_date = today.end_of_week(start_day = :monday)
     @availabilities = Availability.where("start_time >= :start_date AND end_time <= :end_date", {start_date: start_date, end_date: end_date}).where(user_id: current_user.id, status: 'not_booked')
   end
+  
+  def available_doctors
+    date = params[:date]
+
+    @doctors = get_available_doctor(date)
+    render json: @doctors
+  end
+  
 
   def show
   end
@@ -22,8 +29,9 @@ class AvailabilitiesController < ApplicationController
   end
 
   def create
-    start_time = params[:availability][:start_time]
-    end_time = params[:availability][:end_time]
+    start_time = params[:availability][:start_time].to_time
+    end_time = params[:availability][:end_time].to_time
+    
     today = Date.today
     time_slot  = create_time_slot(start_time, end_time)
     (today..today + 6.days).each do |date|
@@ -39,7 +47,7 @@ class AvailabilitiesController < ApplicationController
     end
     respond_to do |format|
       if @status
-        format.html { redirect_to @availability, notice: 'Availability was successfully created.' }
+        format.html { redirect_to availabilities_path, notice: 'Availability was successfully created.' }
         format.json { render :show, status: :created, location: @availability }
       else
         format.html { render :new }

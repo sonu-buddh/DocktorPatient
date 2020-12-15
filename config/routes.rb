@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   get "approve_appoinment/:id", to: "appoinments#approve_appoinment", as: 'approved'
   get "reject_appoinment/:id", to: "appoinments#reject_appoinment", as: 'rejected'
   
+  get "availabilities/available_doctors"
+  
   resources :appoinments
   resources :availabilities
   
