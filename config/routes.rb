@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
-
+  
   root to: "home#index"
-
+  
   get 'home/index'
   get 'home/salary'
   get 'home/show_salary'
@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   
   get "approve_appoinment/:id", to: "appoinments#approve_appoinment", as: 'approved'
   get "reject_appoinment/:id", to: "appoinments#reject_appoinment", as: 'rejected'
-  get 'appoinments/booked_appointment'
+  
   resources :appoinments
-
+  resources :availabilities
+  
 end

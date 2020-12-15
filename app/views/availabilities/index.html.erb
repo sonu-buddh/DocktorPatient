@@ -1,0 +1,62 @@
+<h3>Booked History</h3>
+<div class="text-right">
+    <%= link_to 'New Availability', new_availability_path , class: 'btn btn-success' %>
+</div>
+<br>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+            <th>Saturday</th>
+            <th>Sunday</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @availabilities.each do |availability| %>
+        <% color = availability.status == "booked" ? 'background-color:#FF0000' : 'background-color:#00FF00'  %>
+        <tr>
+            <td style="<%= color %>">
+                <%= availability.start_time&.strftime('%I:%M') %> to
+                <%= availability.end_time&.strftime('%I:%M') %>
+            </td>
+
+            <td style="<%= color %>">
+                <%= availability.start_time&.strftime('%I:%M') %> to
+                <%= availability.end_time&.strftime('%I:%M') %>
+            </td>
+
+            <td style="<%= color %>">
+                <%= availability.start_time&.strftime('%I:%M') %> to
+                <%= availability.end_time&.strftime('%I:%M') %>
+            </td>
+
+            <td style="<%= color %>">
+                <%= availability.start_time&.strftime('%I:%M') %> to
+                <%= availability.end_time&.strftime('%I:%M') %>
+            </td>
+
+            <td style="<%= color %>">
+                <%= availability.start_time&.strftime('%I:%M') %> to
+                <%= availability.end_time&.strftime('%I:%M') %>
+            </td>
+
+            <td style="<%= color %>">
+                <%= availability.start_time&.strftime('%I:%M') %> to
+                <%= availability.end_time&.strftime('%I:%M') %>
+            </td>
+
+            <td style="<%= color %>">
+                <%= availability.start_time&.strftime('%I:%M') %> to
+                <%= availability.end_time&.strftime('%I:%M') %>
+            </td>
+
+
+        </tr>
+        <% end %>
+    </tbody>
+</table>

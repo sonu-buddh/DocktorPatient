@@ -1,4 +1,4 @@
- <nav class="navbar navbar-expand-md ">
+ <nav class="navbar navbar-expand-md header ">
      <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
          <span class="navbar-toggler-icon"></span>
      </button>
@@ -10,9 +10,13 @@
              </div>
          </div>
          <div class="navbar-nav ml-auto">
-             <%= link_to "Column", home_salary_path, class: "nav-item nav-link"   %>
+             <%= link_to "Exercise 1", home_salary_path, class: "nav-item nav-link"   %>
+             <% if current_user.doctor?   %>
+                <%= link_to "Set Avalability", new_availability_path, class: "nav-item nav-link"   %>
+                <%= link_to "Booked History", availabilities_path, class: "nav-item nav-link "  %>
+             <% end %>
              <%= link_to "Appoinments", appoinments_path, class: "nav-item nav-link "  %>
-             <%= link_to "Booked Appoinment", appoinments_booked_appointment_path, class: "nav-item nav-link "  %>
+
              <% if user_signed_in? %>
              <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: "nav-item nav-link" %>
              <% else %>

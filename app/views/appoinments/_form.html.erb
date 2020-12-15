@@ -1,58 +1,67 @@
-<div class="col-md-6 ">
     <%= form_with(model: appoinment, local: true) do |form| %>
-    <% if appoinment.errors.any? %>
-    <div id="error_explanation">
-        <h2><%= pluralize(appoinment.errors.count, "error") %> prohibited this appoinment from being saved:</h2>
+    <%= form.label :booked_date %>
+    <%= form.text_field :booked_date ,class: "ajaxcall", id: "datepicker"%>
 
-        <ul>
-            <% appoinment.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-            <% end %>
-        </ul>
-    </div>
+    <%= form.label :start_time %>
+    <%= form.text_field :start_time , class: "timepicker ajaxcall" , id: "start_time" %>
+
+    <%= form.label :end_time %>
+    <%= form.text_field :end_time , class: "timepicker ajaxcall", id: 'end_time' %>
+
+    <%= form.select :doctor_id, options_for_select(get_doctor, "Select Doctor"), {:prompt => '-- Select Doctor --'} %>
+
+    <%= form.submit "Save", class: 'btn btn-success' %>
     <% end %>
 
-    <div class="field">
-        <%= form.label :start_time %>
-        <%= form.text_field :start_time , class: "form-control timepicker example" , id: "start_time"%>
-    </div>
+    <script>
+        $(function() {
+            // $("#datepicker").datepicker();
 
-    <div class="field">
-        <%= form.label :end_time %>
-        <%= form.text_field :end_time , class: "form-control timepicker example", id: 'end_time'%>
-    </div>
+            var dateToday = new Date();
+            var dates = $("#datepicker").datepicker({
+                dateFormat: "dd-mm-yy",
+                defaultDate: "+1w",
+                // changeMonth: true,
+                // numberOfMonths: 3,
+                minDate: dateToday,
+                // onSelect: function(selectedDate) {
+                //     var option = this.id == "from" ? "minDate" : "maxDate",
+                //         instance = $(this).data("datepicker"),
+                //         date = $.datepicker.parseDate(instance.settings.dateFormat || $.datepicker._defaults.dateFormat, selectedDate, instance.settings);
+                //     dates.not(this).datepicker("option", option, date);
+                // }
+            });
 
-    <div class="field">
-        <%= form.label :doctor_id %>
-        <%= form.select :doctor_id, options_for_select(get_doctor, "Select Doctor"),{}, {class: "form-control"}  %>
-    </div>
+            $('.timepicker').timepicker({
+                timeFormat: 'h:mm p',
+                interval: 60,
+                minTime: '10',
+                maxTime: '6:00pm',
+                defaultTime: '11',
+                startTime: '10:00',
+                dynamic: false,
+                dropdown: true,
+                scrollbar: true
+                // change: event
+            });
 
-    <div class="actions">
-        <%= form.submit "Save", class: 'btn btn-success' %>
-    </div>
-    <% end %>
-
-</div>
-<script src="/custom/bootstrap-datetimepicker.js" type="text/javascript"></script>
-
-<script>
-    $(document).ready(function() {
-
-        $(".example").datetimepicker({
-            todayBtn: 1,
-            autoclose: 1,
-            todayHighlight: 1,
-            startView: 1,
-            minView: 0,
-            maxView: 1,
-            forceParse: 0
         });
 
-        // $('#start_time').change(function() {
-        //     var start_time = $('#start_time').val();
-        //     console.log(start_time);
-        //     $('#end_time').val(start_time + 1);
-        // });
+        $(document).ready(function() {
+            console.log("ready!");
 
-    })
-</script>
+            $('.timepicker').change(function() {
+
+                // var start_time = $('#start_time').val();
+                // $('#end_time').val(start_time);
+                console.log('start_time');
+            });
+
+            $('.ajaxcall').change(function() {
+                var start_time = $('#datepicker').val();
+
+                console.log(start_time);
+            });
+
+        });
+    </script>

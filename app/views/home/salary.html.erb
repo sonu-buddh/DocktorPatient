@@ -1,7 +1,11 @@
-<%= form_tag home_calculate_salary_path, method: :post do %>
-Enter Amount here:
-<%= text_field_tag :amount %>
-<%= submit_tag  "Submit", class: "btn btn-success" %>
-<% end %>
-
-Column Value : => <%= params[:column].present? ? params[:column] : 0 %>
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <%= form_tag home_calculate_salary_path, method: :post do %>
+        Enter Amount here:
+        <%= text_field_tag :svalue, "", placeholder: "Enter S value" %>
+        <%= text_field_tag :amount, "", placeholder: "Enter Amount" %>
+        <%= submit_tag  "Submit", class: "btn btn-success" %>
+        <% end %>
+        Column Value : => <%= params[:column].present? ? params[:column] : 0 %>
+    </div>
+</div>

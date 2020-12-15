@@ -10,7 +10,8 @@ class HomeController < ApplicationController
 
   def calculate_salary
     amount = params[:amount].to_i
-    value = (amount / 100.00)
+    svalue = params[:svalue].to_f
+    value = (amount / svalue)
     column = (value % 12).round
     redirect_to home_salary_path(column: column)
   end

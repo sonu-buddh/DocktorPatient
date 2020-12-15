@@ -1,0 +1,53 @@
+<%= form_with(model: availability, local: true) do |form| %>
+    <%= form.label :start_time %>
+    <%= form.text_field :start_time, class: "timepicker", id: "start_time" %>
+
+    <%= form.label :end_time %>
+    <%= form.text_field :end_time, class: "timepicker", id: "end_time"  %>
+<%= form.submit "save" %>
+<% end %>
+
+<script>
+    $(function() {
+        // $("#datepicker").datepicker();
+
+        // var dateToday = new Date();
+        // var dates = $("#datepicker").datepicker({
+        //     dateFormat: "dd-mm-yy",
+        //     defaultDate: "+1w",
+        //     // changeMonth: true,
+        //     // numberOfMonths: 3,
+        //     minDate: dateToday,
+        //     // onSelect: function(selectedDate) {
+        //     //     var option = this.id == "from" ? "minDate" : "maxDate",
+        //     //         instance = $(this).data("datepicker"),
+        //     //         date = $.datepicker.parseDate(instance.settings.dateFormat || $.datepicker._defaults.dateFormat, selectedDate, instance.settings);
+        //     //     dates.not(this).datepicker("option", option, date);
+        //     // }
+        // });
+
+        $('.timepicker').timepicker({
+            timeFormat: 'h:mm p',
+            interval: 60,
+            minTime: '10',
+            maxTime: '6:00pm',
+            defaultTime: '11',
+            startTime: '10:00',
+            dynamic: false,
+            dropdown: true,
+            scrollbar: true
+        });
+
+    });
+
+    $(document).ready(function() {
+        console.log("ready!");
+
+        $('.timepicker').change(function() {
+
+            // var start_time = $('#start_time').val();
+            // $('#end_time').val(start_time);
+            console.log('start_time');
+        });
+    });
+</script>

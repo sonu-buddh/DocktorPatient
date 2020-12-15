@@ -2,8 +2,6 @@ class AppoinmentsController < ApplicationController
   before_action :set_appoinment, only: [:approve_appoinment, :reject_appoinment, :show, :edit, :update, :destroy]
   before_action :authenticate_user!
 
-  # GET /appoinments
-  # GET /appoinments.json
   def index
     if current_user.patient?
       @appoinments = current_user.appoinments
@@ -12,31 +10,16 @@ class AppoinmentsController < ApplicationController
     end
   end
   
-  def booked_appointment
-    today = Date.today
-    start_date = today.beginning_of_week(start_day = :monday)
-    end_date = today.end_of_week(start_day = :monday)
-
-    @appoinments = Appoinment.where("start_time >= :start_date OR end_time <= :end_date", {start_date: start_date, end_date: end_date})
-  end
-  
-
-  # GET /appoinments/1
-  # GET /appoinments/1.json
   def show
   end
 
-  # GET /appoinments/new
   def new
     @appoinment = Appoinment.new
   end
 
-  # GET /appoinments/1/edit
   def edit
   end
 
-  # POST /appoinments
-  # POST /appoinments.json
   def create
     @appoinment = Appoinment.new(appoinment_params)
     @appoinment.user_id = current_user.id
@@ -53,8 +36,6 @@ class AppoinmentsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /appoinments/1
-  # PATCH/PUT /appoinments/1.json
   def update
     respond_to do |format|
       if @appoinment.update(appoinment_params)
@@ -67,8 +48,6 @@ class AppoinmentsController < ApplicationController
     end
   end
 
-  # DELETE /appoinments/1
-  # DELETE /appoinments/1.json
   def destroy
     @appoinment.destroy
     respond_to do |format|
@@ -89,12 +68,10 @@ class AppoinmentsController < ApplicationController
   
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_appoinment
       @appoinment = Appoinment.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def appoinment_params
       params.require(:appoinment).permit(:start_time, :end_time, :user_id, :doctor_id, :status)
     end
