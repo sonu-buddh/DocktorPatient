@@ -16,7 +16,6 @@ class AvailabilitiesController < ApplicationController
     @doctors = get_available_doctor(date)
     render json: @doctors
   end
-  
 
   def show
   end

@@ -54,8 +54,9 @@
                     if (result.length === 0) {
                         $('#select_doctor').html(new Option("-- Select Doctor --", ""))
                     } else {
+                        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>",result.length);
                         $.each(result, function(key, value) {
-                            $('#select_doctor').append(new Option(value[0], value[1]))
+                            $('#select_doctor').html(new Option(value[0], value[1]))
                         });
                     }
                 },
